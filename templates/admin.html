@@ -1,0 +1,183 @@
+{% extends "layout.html" %}
+{% block heading__button %}
+    <button class="admin-button" name="admin-logout">
+        Выйти из аккаунта
+    </button>
+    <button class="admin-button admin-singup" name="singup">
+        Регистрация
+    </button>
+{% endblock %}
+
+{% block heading %}
+   <a class ="title" href="{{url_for('index')}}"> Абитуриенты </a>
+{% endblock %}
+
+{% block body %}
+    {%if regestration=="True"%}
+        <div class="admin">
+            <div class="container admin__container">
+            <form class="admin__login form" action="{{url_for('adminRegistration')}}" method="post">
+                <label>{{message["header"]}}</label>
+                <div class="form-group">
+                <p>Email</p>
+                <input class="form-control" type="mail" required="true" name="mail">
+                <p>Логин</p>
+                <input class="form-control" type="text" required="true" name="login">
+                <p>Пароль</p>
+                <input class="form-control" type="password" required="true" name="password">
+                </div>
+                <div class="form-group admin__buttons">
+                <button class="cancel cancel-reg admin-button" 
+                type="reset">{{message["cancel"]}}</button>
+                <button class="submit admin-singup" name="login" 
+                type="submit">{{message["submit"]}}</button>
+                </div>
+            </form>
+            </div>
+        </div>
+    {%endif%}
+    <main class="admin-page">
+        <nav class="tabs">
+            <ul>
+            <a href="#informatic">
+                <li href="#informatic" class="tabs-item active">Информатика</li></a>
+            <a href="#robots">
+                <li href="#robots" class="tabs-item">Робототехника</li></a>
+            <a href="#nano">
+                <li href="#nano" class="tabs-item">Нанотехнологии</li></a>
+            <a href="#bio">
+                <li href="#bio" class="tabs-item">Биоинженерия</li></a>
+            <a href="#physics">
+                <li href="#physics" class="tabs-item">Физика</li></a>
+            </ul>
+        </nav>
+        <section class="students">
+        <div class="students__inner visible" id="informatic">
+            {% for student in informatic__students %}
+                {% if student.good%}
+                <div class="students__card good">
+                {%else%}
+                <div class="students__card bad">
+                {% endif%}
+                    <form action="{{ url_for('doit') }}" method="POST">
+                        <!-- скрытый параметр -->
+                        <input type="hidden" name="id" value="{{student.id}}">
+                        <input type="submit" class="delete" value="Удалить">
+                    </form>
+                    {% if student.payment%}
+                    <div class="payment">
+                        Платно
+                    </div>
+                    {% endif%}
+                    <p class="inner__name">{{student.fio}}</p>
+                    <a class="inner__mail" href="mailto:{{student.mail}}">
+                        {{student.mail}}</a>
+                    <a class="inner__phone" href="tel:{{student.phone}}">
+                        {{student.phone}}</a>
+                    <div class="inner__dop-info">
+                        <p class="inner__age">{{student.age}}</p>
+                        <p class="inner__country">{{student.citizen}}</p>
+                        <p class="inner__from">{{student.knowfrom}}</p>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+        <div class="students__inner" id="robots">
+            {% for student in robots__students %}
+                {% if student.good%}
+                <div class="students__card good">
+                {%else%}
+                <div class="students__card bad">
+                {% endif%}   
+                    <form action="{{ url_for('doit') }}" method="POST">
+                        <!-- скрытый параметр -->
+                        <input type="hidden" name="id" value="{{student.id}}">
+                        <input type="submit" class="delete" value="Удалить">
+                    </form>
+                    <p class="inner__name">{{student.fio}}</p>
+                    <a class="inner__mail" href="mailto:{{student.mail}}">{{student.mail}}</a>
+                    <a class="inner__phone" href="tel:{{student.phone}}">{{student.phone}}</a>
+                    <div class="inner__dop-info">
+                        <p class="inner__age">{{student.age}}</p>
+                        <p class="inner__country">{{student.citizen}}</p>
+                        <p class="inner__from">{{student.knowfrom}}</p>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+        <div class="students__inner" id="nano">
+            {% for student in nano__students %}
+                {% if student.good%}
+                <div class="students__card good">
+                {%else%}
+                <div class="students__card bad">
+                {% endif%}   
+                    <form action="{{ url_for('doit') }}" method="POST">
+                        <!-- скрытый параметр -->
+                        <input type="hidden" name="id" value="{{student.id}}">
+                        <input type="submit" class="delete" value="Удалить">
+                    </form>
+                    <p class="inner__name">{{student.fio}}</p>
+                    <a class="inner__mail" href="mailto:{{student.mail}}">{{student.mail}}</a>
+                    <a class="inner__phone" href="tel:{{student.phone}}">{{student.phone}}</a>
+                    <div class="inner__dop-info">
+                        <p class="inner__age">{{student.age}}</p>
+                        <p class="inner__country">{{student.citizen}}</p>
+                        <p class="inner__from">{{student.knowfrom}}</p>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+        <div class="students__inner" id="bio">
+            {% for student in bio__students %}
+                {% if student.good%}
+                <div class="students__card good">
+                {%else%}
+                <div class="students__card bad">
+                {% endif%}   
+                    <form action="{{ url_for('doit') }}" method="POST">
+                        <!-- скрытый параметр -->
+                        <input type="hidden" name="id" value="{{student.id}}">
+                        <input type="submit" class="delete" value="Удалить">
+                    </form>
+                    <p class="inner__name">{{student.fio}}</p>
+                    <a class="inner__mail" href="mailto:{{student.mail}}">{{student.mail}}</a>
+                    <a class="inner__phone" href="tel:{{student.phone}}">{{student.phone}}</a>
+                    <div class="inner__dop-info">
+                        <p class="inner__age">{{student.age}}</p>
+                        <p class="inner__country">{{student.citizen}}</p>
+                        <p class="inner__from">{{student.knowfrom}}</p>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+        <div class="students__inner" id="physics">
+            {% for student in physics__students %}
+                {% if student.good%}
+                <div class="students__card good">
+                {%else%}
+                <div class="students__card bad">
+                {% endif%}   
+                    <form action="{{ url_for('doit') }}" method="POST">
+                        <!-- скрытый параметр -->
+                        <input type="hidden" name="id" value="{{student.id}}">
+                        <input type="submit" class="delete" value="Удалить">
+                    </form>
+                    <p class="inner__name">{{student.fio}}</p>
+                    <a class="inner__mail" href="mailto:{{student.mail}}">{{student.mail}}</a>
+                    <a class="inner__phone" href="tel:{{student.phone}}">{{student.phone}}</a>
+                    <div class="inner__dop-info">
+                        <p class="inner__age">{{student.age}}</p>
+                        <p class="inner__country">{{student.citizen}}</p>
+                        <p class="inner__from">{{student.knowfrom}}</p>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+        </section>
+    </main>
+{% endblock %}
+
+{% block scripts%}
+  <script src="{{ url_for('static',filename='js/admin.js') }}"></script>
+{% endblock %}

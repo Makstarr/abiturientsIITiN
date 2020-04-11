@@ -1,0 +1,180 @@
+{% extends "layout.html" %}
+{% block heading__button %}
+  <button class="admin-button login-button">
+    Администратор
+  </button>
+{% endblock %}
+{% block heading %}
+  Анкета абитуриента<br>
+  Университета ИИТиН
+{% endblock %}
+{% block body %}
+  {%if login=="True"%}
+    <div class="admin">
+      <div class="container admin__container">
+        <form action ="{{ url_for('admin') }}" method="post" 
+        class="admin__login form">
+          <label>{{message}}</label>
+          <div class="form-group">
+            <p>Логин</p>
+            <input class="form-control" type="text" 
+            required="true" name="login">
+            <p>Пароль</p>
+            <input class="form-control" type="password" 
+            required="true" name="password">
+          </div>
+          <div class="form-group admin__buttons">
+            <button class="cancel admin-button cancel-log" type="reset">
+              Отмена
+            </button>
+            <button class="submit" type="submit">
+              Подтвердить
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  {%endif%}
+  <main>
+    <div class="container main">
+      <form class="form" action="{{ url_for('admin__send') }}" 
+      method="post" name="resiume" id="survey-form">
+        <div class="form-group">
+          <p>Email *</p>
+          <input 
+          class="form__email form-control" 
+          type="email"
+          maxlength="30"
+          minlength="7"
+          placeholder="Введите email" 
+          required="true"
+          name="mail">
+        </div>
+        <div class="form-group">
+          <p>ФИО полностью *</p>
+          <input 
+          class="form__fio form-control" 
+          type="text"
+          maxlength=100
+          maxlength=5
+          placeholder="Иванов Иван Иванович"
+          required="true" 
+          name="fio">
+        </div>
+        <div class="form-group">
+          <p>Возраст</p>
+          <input 
+          class="form__age form-control" 
+          type="number" 
+          min="10"
+          max="99"
+          placeholder="Возраст"
+          name="age">
+        </div>
+        <div class="form-group">
+          <p>Номер телефона *</p>
+          <input 
+          class="form__phone form-control" 
+          type="tel" 
+          minlength="4"
+          maxlength="15"
+          placeholder="Номер телефона" 
+          required="true"
+          name="phone">
+        </div>
+        <div class="form-group">
+          <p>Гражданство *</p>
+          <input 
+          class="form__citizen form-control" 
+          type="text" 
+          placeholder="Гражданство" 
+          required="true"
+          name="citizen">
+        </div>
+        <div class="form-group">
+          <p>Откуда Вы узнали об университете?</p>
+          <label class="checkbox">
+            <input class="form__sourse" type="checkbox" 
+            value="Поиск в интернете" name="fromWhere">
+            Поиск в интернете
+          </label>
+          <label class="checkbox">
+            <input class="form__sourse" type="checkbox" 
+            value="От знакомого" name="fromWhere">
+            От знакомого
+          </label>
+          <label class="checkbox">
+            <input class="form__sourse" type="checkbox" 
+            value="Соцсети" name="fromWhere">
+            Соцсети
+          </label>
+          <label class="checkbox">
+            <input class="form__sourse" type="checkbox" 
+            value="lms canvas" name="fromWhere">
+            lms canvas
+          </label>
+          <label class="checkbox">
+            <input class="form__sourse" type="checkbox" 
+            value="Живу рядом" name="fromWhere">
+            Живу рядом
+          </label>
+          <label class="checkbox">
+            <input class="form__sourse" type="checkbox" 
+            value="Дни открытых дверей" name="fromWhere">
+            Дни открытых дверей
+          </label>
+          <label class="checkbox">
+            <input 
+            class="form__sourse form-control" 
+            type="text" 
+            placeholder="Другое"
+            maxlength="30"
+            name="fromWhere">
+          </label>
+        </div>
+        <div class="form-group">
+          <p>Профиль, на котором Вы планируете учиться *</p>
+          <select 
+          class="form__profile form-control" 
+          required="true" 
+          id="dropdown"
+          name="profession">
+            <option disabled selected value>Выберите направление</option>
+            <option value="1">Информатика</option>
+            <option value="2">Робототехника</option>
+            <option value="3">Нанотехнологии</option>
+            <option value="4">Биоинженерия</option>
+            <option value="5">Физика</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <p>Готовы ли вы оплачивать обучение? *</p>
+          <label class="radio">
+            <input class="form__money" type="radio" 
+            required="true" name="payment">
+            Готов
+          </label>
+          <label class="radio">
+            <input class="form__money" type="radio" 
+            required="true" name="payment">
+            Не готов
+          </label>
+        </div>
+        <div class="form-group">
+          <button type="submit" class="form__button" id="submit">
+            {%if data=="sent"%}
+            <span>{{message}}</span>
+            {%else%}
+            <span>Отправить</span>
+            {%endif%}
+          </button>
+        </div>
+      </form>
+    </div>
+  </main>
+{% endblock %}
+
+{% block scripts %}
+  <script src="{{ url_for('static',filename='js/main.js') }}">
+  </script>
+{% endblock %}
