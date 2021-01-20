@@ -1,4 +1,3 @@
-# student-form
 ## <a href="https://students-iitin.herokuapp.com"> ОТКРЫТЬ ПРИЛОЖЕНИЕ </a>
 ### Для входа в адм. панель логин: 123 пароль: 123
 
